@@ -53,4 +53,8 @@ router.post(
 );
 router.get("/download-result/:id", controller.downloadResult);
 
+router.post('/chatt', verify, controller.chatt);
+router.post('/tchatt', verify, controller.tchatt);
+
+
 module.exports = router;

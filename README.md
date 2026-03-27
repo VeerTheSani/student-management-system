@@ -1,46 +1,51 @@
 # 🎓 Student Management System
 
-A  simple full-stack web application to manage students and their academic results with CSV upload support, dashboards, and automatic CGPA calculation.
+A simple full-stack web application to manage students and their academic results with CSV upload support, dashboards, automatic CGPA calculation, and an integrated AI Academic Assistant.
 
 ---
 
 ## 🚀 Features
 
-* 📂 Upload students via CSV
-* 📊 Upload results via CSV
+* 📂 Upload students & results via CSV
 * 🎯 Automatic total, percentage & CGPA calculation
-* 👨‍🎓 Student Dashboard
-* 👩‍🏫 Teacher Dashboard
+* 👨‍🎓 Student Dashboard & 👩‍🏫 Teacher Dashboard
 * 🔐 Authentication (JWT-based)
 * 📁 MVC Architecture
+* 🤖 **NEW:** AI-Powered Academic Assistant (Groq API) to analyze student performance
 
 ---
 
 ## 🛠 Tech Stack
 
 * **Backend:** Node.js, Express.js
+* **AI Microservice:** Python, FastAPI
+* **AI Model:** Groq API (LLaMA 3)
 * **Database:** MongoDB
-* **Frontend:** EJS, CSS(Tailwind css)
+* **Frontend:** EJS, CSS (Tailwind)
 * **Other:** Multer (file upload), CSV Parser
 
 ---
 
 ## 📂 Project Structure
 
-```
-server/
- ├── controller/
- ├── database/
- ├── middleware/
- ├── model/
- ├── routes/
-views/
- ├── student/
- ├── teacher/
- ├── include/
-Server.js
-package.json
-```
+```text
+student-management-system/
+ ├── chatbot/               # Python FastAPI AI Server
+ │   ├── chatbot.py
+ │   ├── requirements.txt
+ │   └── .env (Add Your GROQ API Here)
+ ├── server/                # Node.js Express Backend
+ │   ├── controller/
+ │   ├── database/
+ │   ├── middleware/
+ │   ├── model/
+ │   └── routes/
+ ├── views/                 # EJS Frontend
+ │   ├── student/
+ │   ├── teacher/
+ │   └── include/
+ ├── Server.js
+ ├── package.json
 
 ---
 
@@ -72,7 +77,7 @@ PORT=3000
 MONGO_URI=mongodb://localhost:27017/student_mgm2
 JWT_SECRET=your_secret_key
 ```
-
+also edit in /chatbot file, add Your Groq api in `.env`file
 ---
 
 ### 4️⃣ Start MongoDB
@@ -108,7 +113,7 @@ http://localhost:3000
 ## 📈 Future Improvements
 
 * 📊 Add charts & analytics dashboard
-* 🤖 AI-based performance insights
+* 🤖 Agentic AI implementation
 * 🌐 Deploy to cloud (Render / Vercel)
 * 📱 Improve UI/UX
 
@@ -117,6 +122,7 @@ http://localhost:3000
 ## 👩‍💻 Author
 
 **Nandani J Solgama**
+
 
 ---
 

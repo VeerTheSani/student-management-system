@@ -6,6 +6,7 @@ const Result = require('../model/result')
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const salt = 12;
+const axios = require('axios');
 
 exports.login = async (req, res) => {
     const { email, password, role } = req.body;
@@ -509,6 +510,41 @@ exports.uploadStudent = async (req, res) => {
             res.send("CSV Uploaded Successfully");
         });
 };
+
+// ## my code for chat with teacher and student
+exports.chatt = async (req, res) => {
+    try {
+        const email = req.user.email
+        const student = await Student.findOne({ email })
+
+        const response = await axios.post('http://127.0.0.1:8000/chatt', {
+            message: req.body.message,
+            student_id: student._id.toString()
+        })
+
+        res.json({ reply: response.data.reply })
+    } catch (error) {
+        console.error("Error in chatt:", error);
+        res.status(500).json({ error: "Backend connection failed. Check Node console" });
+    }
+}
+
+exports.tchatt = async (req, res) => {
+    try {
+        const email = req.user.email
+        const teacher = await Teacher.findOne({ email })
+
+        const response = await axios.post('http://127.0.0.1:8000/tchatt', {
+            message: req.body.message,
+            teacher_id: teacher._id.toString()
+        })
+
+        res.json({ reply: response.data.reply })
+    } catch (error) {
+        console.error("Error in tchatt:", error);
+        res.status(500).json({ error: "Backend connection failed. Check Node console" });
+    }
+}
 
 
 // download pdf of reuslt
