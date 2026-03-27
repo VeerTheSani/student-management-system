@@ -9,6 +9,7 @@ const connectDB = require('./server/database/connectDB');
 connectDB();
 const app = express();
 
+app.use(express.json());  // this thing destroyed my whole day
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(morgan('dev'));
