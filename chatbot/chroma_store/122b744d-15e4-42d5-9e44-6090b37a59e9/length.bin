@@ -1,0 +1,6 @@
+invalid type: string "101, Main Building\nPrincipal Office : Room 201, Main Building\nExam Cell        : Room 105, Main Building\nEmail            : academics@gandhinagaruniversity.edu.in\nHelpline         : 079-XXXXXXXX (9 AM to 5 PM)\n", expected i64oolean  : Rs. 1,200
+Total          : Rs. 22,700
+Last date      : March 31, 2025 (late fine Rs. 100 per day after)
+
+CONTACT:
+Academic Office  : Room 

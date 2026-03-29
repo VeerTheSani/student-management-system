@@ -1,0 +1,424 @@
+
+
+Our acadamic Syllabus for OOP JAVA
+
+UNIT 1
+
+
+Introduction to Object-Oriented Programming
+(OOP), Principles of OOP: Encapsulation, Abstraction, Inheritance,
+Polymorphism, Difference between Procedural and Object-Oriented Programming,
+Overview of Java: History, Features, JVM, JDK, JRE, Setting up Java Development
+Environment, Writing and Executing Java Programs, Data Types, Variables,
+Operators, Control Statements: Decision Making (if, switch), Looping (for,
+while, do-while)
+
+UNIT 2
+Classes,
+Objects, and Methods
+
+Defining and Creating Classes and Objects,
+Constructors and Types (Default, Parameterized, Copy Constructor), Method
+Overloading and Constructor Overloading, Understanding this and static
+Keywords, Access Modifiers (private, public, protected, default), Memory
+Management: Stack vs. Heap, Garbage Collection, Object Class and toString()
+Method
+
+UNIT 3
+Inheritance
+  and Polymorphism
+  
+Concept
+  of Inheritance and Code Reusability, Types of Inheritance: Single,
+  Multilevel, Hierarchical, Hybrid (not directly supported in Java) Method
+  Overriding and Super Keyword, Use of final Keyword in Inheritance,
+  Understanding Polymorphism: Compile-time vs. Runtime Dynamic Method Dispatch,
+  Abstract Classes and Methods, Interfaces and Multiple Inheritance in Java
+
+Structured summary of your OOP with Java syllabus.
+
+UNIT 1: Introduction to OOP and Basics of Java
+1. Introduction to Object-Oriented Programming (OOP)
+OOP is a programming paradigm where programs are built using objects and classes rather than functions and procedures.
+
+Key idea: model real world entities as objects.
+
+Example
+Car → object
+Speed, color → attributes
+Drive(), brake() → methods
+
+2. Principles of OOP
+Encapsulation
+Wrapping data and methods together in a single unit (class) and restricting direct access.
+
+Example
+
+class Student {
+    private int marks;
+
+    public void setMarks(int m){
+        marks = m;
+    }
+
+    public int getMarks(){
+        return marks;
+    }
+}
+Abstraction
+Showing only essential features and hiding internal implementation.
+
+Example
+User presses button → machine works internally.
+
+Inheritance
+One class acquires properties of another class.
+
+Example
+
+class Animal {
+    void eat(){
+        System.out.println("Eating");
+    }
+}
+
+class Dog extends Animal {
+    void bark(){
+        System.out.println("Barking");
+    }
+}
+Polymorphism
+One function behaves in different ways.
+
+Example
+Method overloading:
+
+int add(int a, int b)
+double add(double a, double b)
+3. Procedural vs Object-Oriented Programming
+Procedural Programming	Object Oriented Programming
+Program divided into functions	Program divided into objects
+Focus on procedures	Focus on data
+No data hiding	Data hiding possible
+Example: C	Example: Java
+4. Overview of Java
+History
+Developed by James Gosling (Sun Microsystems) in 1995.
+
+5. Features of Java
+Platform Independent
+
+Object Oriented
+
+Secure
+
+Robust
+
+Multithreaded
+
+Portable
+
+6. JVM, JDK, JRE
+JVM (Java Virtual Machine)
+Executes Java bytecode.
+
+JRE (Java Runtime Environment)
+Contains JVM + libraries to run Java programs.
+
+JDK (Java Development Kit)
+Contains JRE + development tools (compiler, debugger).
+
+7. Writing and Executing Java Program
+Example program:
+
+class Hello {
+    public static void main(String[] args){
+        System.out.println("Hello World");
+    }
+}
+Compile
+
+javac Hello.java
+Run
+
+java Hello
+8. Data Types
+Primitive Data Types
+
+Type	Size
+int	4 bytes
+float	4 bytes
+double	8 bytes
+char	2 bytes
+boolean	true/false
+9. Variables
+Used to store data.
+
+Example
+
+int age = 20;
+double salary = 5000.5;
+10. Operators
+Types
+
+Arithmetic (+ - * / %)
+
+Relational (< > == !=)
+
+Logical (&& || !)
+
+Assignment (= += -=)
+
+11. Control Statements
+Decision Making
+
+if statement
+
+if(age > 18){
+    System.out.println("Adult");
+}
+switch statement
+
+switch(day){
+case 1: System.out.println("Monday");
+break;
+}
+Looping
+
+for loop
+
+for(int i=0;i<5;i++){
+    System.out.println(i);
+}
+while loop
+
+while(i<5){
+    i++;
+}
+do while loop
+
+do{
+    i++;
+}while(i<5);
+UNIT 2: Classes, Objects and Methods
+1. Class
+Blueprint for creating objects.
+
+Example
+
+class Student{
+    int id;
+    String name;
+
+    void display(){
+        System.out.println(id + " " + name);
+    }
+}
+2. Object
+Instance of a class.
+
+Student s1 = new Student();
+s1.id = 1;
+s1.name = "Rahul";
+3. Constructors
+Special method used to initialize objects.
+
+Default Constructor
+
+Student(){
+    id = 0;
+}
+Parameterized Constructor
+
+Student(int i){
+    id = i;
+}
+Copy Constructor
+
+Student(Student s){
+    id = s.id;
+}
+4. Method Overloading
+Same method name with different parameters.
+
+int add(int a,int b)
+int add(int a,int b,int c)
+5. Constructor Overloading
+Multiple constructors in same class.
+
+Student(){}
+Student(int id){}
+Student(int id,String name){}
+6. this Keyword
+Refers to current object.
+
+Example
+
+class Student{
+    int id;
+
+    Student(int id){
+        this.id = id;
+    }
+}
+7. static Keyword
+Used for class level variables or methods.
+
+class Test{
+    static int count = 0;
+}
+Shared by all objects.
+
+8. Access Modifiers
+Modifier	Access
+public	accessible everywhere
+private	within same class
+protected	same package + subclasses
+default	same package
+9. Memory Management
+Stack
+
+Stores:
+
+method calls
+
+local variables
+
+Heap
+
+Stores:
+
+objects
+
+class instances
+
+10. Garbage Collection
+Java automatically removes unused objects from memory.
+
+Example
+
+Student s = new Student();
+s = null;
+Unused object will be removed by garbage collector.
+
+11. Object Class and toString()
+All classes inherit from Object class.
+
+Default toString() prints object reference.
+
+Override example:
+
+public String toString(){
+    return "Student object";
+}
+UNIT 3: Inheritance and Polymorphism
+1. Inheritance
+Allows one class to reuse properties of another.
+
+class Animal{
+    void eat(){}
+}
+
+class Dog extends Animal{
+    void bark(){}
+}
+2. Types of Inheritance
+Single Inheritance
+
+A → B
+
+Multilevel Inheritance
+
+A → B → C
+
+Hierarchical Inheritance
+
+A → B
+A → C
+
+Hybrid Inheritance
+
+Combination (not directly supported in Java).
+
+3. Method Overriding
+Subclass provides its own implementation.
+
+class Animal{
+    void sound(){
+        System.out.println("Animal sound");
+    }
+}
+
+class Dog extends Animal{
+    void sound(){
+        System.out.println("Bark");
+    }
+}
+4. super Keyword
+Used to refer parent class.
+
+super.sound();
+Used for:
+
+calling parent method
+
+calling parent constructor
+
+5. final Keyword
+Used to restrict modification.
+
+final variable → cannot change
+
+final method → cannot override
+
+final class → cannot inherit
+
+Example
+
+final class A{}
+6. Polymorphism
+One interface, multiple implementations.
+
+Compile-time polymorphism
+Method overloading.
+
+Runtime polymorphism
+Method overriding.
+
+7. Dynamic Method Dispatch
+Method call resolved at runtime.
+
+Example
+
+Animal a = new Dog();
+a.sound();
+Dog's method runs.
+
+8. Abstract Class
+Class that cannot be instantiated.
+
+abstract class Shape{
+    abstract void draw();
+}
+9. Interface
+Collection of abstract methods.
+
+interface Animal{
+    void eat();
+}
+Used for multiple inheritance.
+
+If you want, I can also give:
+
+Most important exam questions from this syllabus
+
+One-mark questions (50+) your teacher can ask
+
+Very short revision sheet (5 pages)
+
+Tricky viva questions teachers ask in OOP Java
+
+These usually help a lot in assignments and exams.
+
+
+

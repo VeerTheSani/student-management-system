@@ -9,9 +9,28 @@ import motor.motor_asyncio
 import os
 from dotenv import load_dotenv
 from bson import ObjectId
+from contextlib import asynccontextmanager
+
+
+
+## RAG dependency
+from rag_setup import retrieve, load_all_docs
 
 load_dotenv()
-app = FastAPI()
+# app = FastAPI()
+
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    load_all_docs()  # runs on startup
+    yield            # server runs here
+    
+app = FastAPI(lifespan=lifespan)
+
+# app.on_event("startup")
+# async def startup_event():
+#     load_all_docs()  ### this will load all the docs into vector once servereere starts...
 
 app.add_middleware(
     CORSMiddleware,
@@ -71,6 +90,11 @@ async def chat_userquery(query: ChatRequest):
         now below the student will ask for the first time so greet and answer and assist like human tone.
 
         studnet chat history : 
+
+
+        STRICT RULE: Only answer using the course material provided below.
+        If the answer is not in the material, say "I don't have that information in my current documents."
+        Do NOT make up units, documents, or any information not explicitly given to yo
         """
     history_docs = await db.students_history.find(
     {"student_id": ObjectId(query.student_id)}).sort("created_at", -1).limit(5).to_list(length=5)
@@ -89,6 +113,10 @@ async def chat_userquery(query: ChatRequest):
 
         studentChatHistory.append({"role": "user", "content": user_msges})
         studentChatHistory.append({"role": "assistant", "content": assistant_msges})
+
+        relevant_docs = retrieve(query.message)
+        if relevant_docs:
+            context += f"\n\n Relevant course materials:\n{relevant_docs}"
     try:
         response = client.chat.completions.create(
             model='llama-3.3-70b-versatile',
