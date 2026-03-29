@@ -1,0 +1,59 @@
+BCA SEMESTER 4 - JAVA OOP UNIT NOTES
+
+UNIT 1: Introduction to Java and OOP Concepts
+
+What is Java?
+Java is a high-level, object-oriented, platform-independent programming language.
+Java programs are compiled into bytecode which runs on the JVM (Java Virtual Machine).
+Java is Write Once Run Anywhere (WORA).
+
+Four Pillars of OOP:
+1. Encapsulation - wrapping data and methods inside a class
+2. Inheritance - child class acquiring properties of parent class
+3. Polymorphism - one method behaving differently in different situations
+4. Abstraction - hiding internal details, showing only functionality
+
+UNIT 2: Classes and Objects
+
+A class is a blueprint or template for creating objects.
+An object is an instance of a class.
+Syntax: ClassName objectName = new ClassName();
+
+Constructor: special method with same name as class, no return type.
+Default constructor is provided by Java if not defined.
+Parameterized constructor accepts arguments.
+this keyword refers to the current object.
+
+UNIT 3: Inheritance
+
+Inheritance allows a class to inherit fields and methods from another class.
+extends keyword is used for inheritance.
+super() calls the parent class constructor.
+Types: Single, Multilevel, Hierarchical (Java does not support multiple inheritance with classes).
+Method Overriding: child class redefines method of parent class.
+
+UNIT 4: Polymorphism and Abstraction
+
+Compile-time polymorphism: Method Overloading (same method name, different parameters)
+Runtime polymorphism: Method Overriding
+
+Abstract class: declared with abstract keyword, cannot be instantiated.
+Abstract method: no body, must be implemented by subclass.
+Interface: fully abstract, all methods are abstract by default.
+A class can implement multiple interfaces.
+implements keyword used for interfaces.
+
+UNIT 5: Exception Handling and Collections
+
+Exception: runtime error that disrupts normal program flow.
+try-catch block used to handle exceptions.
+finally block always executes.
+throw keyword used to explicitly throw exception.
+throws keyword used in method signature.
+
+Collections Framework:
+ArrayList - dynamic array, allows duplicates
+LinkedList - doubly linked list
+HashMap - key-value pairs, no order
+HashSet - no duplicates, no order
+TreeMap - sorted key-value pairs

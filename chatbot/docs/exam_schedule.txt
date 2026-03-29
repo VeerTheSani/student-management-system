@@ -1,0 +1,22 @@
+GANDHINAGAR UNIVERSITY - BCA SEMESTER 4
+End Semester Examination Schedule 2025
+
+Subject                  | Date         | Time        | Room
+-------------------------|--------------|-------------|------
+Java OOP                 | April 15     | 10:00 AM    | Room 301
+Python & Data Science    | April 17     | 10:00 AM    | Room 302
+Data Analytics           | April 19     | 02:00 PM    | Room 301
+Management Info Systems  | April 21     | 10:00 AM    | Room 303
+Computer Networks        | April 23     | 02:00 PM    | Room 302
+
+Internal Assessment Dates:
+Unit Test 1  - March 10, 2025
+Unit Test 2  - March 24, 2025
+Practicals   - April 5-8, 2025
+
+Important Notes:
+- Students must carry their enrollment card and college ID.
+- No electronic devices allowed in exam hall.
+- Students must be seated 15 minutes before exam starts.
+- Late entry not allowed after 30 minutes of exam start.
+- Results will be declared within 30 days after last exam.

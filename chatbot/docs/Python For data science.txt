@@ -1,0 +1,391 @@
+5-Marks Questions (Short Answers)
+1. Define Data Science and explain its importance in real-world applications.
+
+Definition:
+Data Science is the field that uses statistics, programming, and machine learning to analyze large amounts of data and extract useful insights.
+
+Importance in Real World:
+
+Business decisions
+Companies analyze customer data to improve products and marketing.
+Healthcare
+Used to predict diseases and improve treatment planning.
+Finance
+Helps detect fraud and predict stock market trends.
+Recommendation systems
+Platforms like Netflix or Amazon suggest movies or products using data science.
+
+Example:
+Amazon analyzes customer purchase history to recommend products.
+
+2. Explain the role of Python in Data Science.
+
+Python plays a major role in data science because it is simple, powerful, and has many libraries for data analysis.
+
+Roles of Python in Data Science:
+
+Data Analysis
+Libraries like Pandas help analyze large datasets.
+Mathematical Computation
+NumPy allows fast numerical calculations.
+Data Visualization
+Libraries like Matplotlib create graphs and charts.
+Machine Learning
+Libraries like Scikit-learn help build predictive models.
+Automation
+Python can automate repetitive data tasks.
+
+Example:
+A data scientist can use Python to analyze sales data and predict future sales.
+
+3. List and explain any four libraries used in the Python data science ecosystem.
+1. NumPy
+
+Used for numerical computations and working with arrays.
+
+Example use:
+
+Mathematical operations
+Scientific calculations
+2. Pandas
+
+Used for data manipulation and analysis using tables (DataFrames).
+
+Example use:
+
+Data cleaning
+Data filtering
+Data analysis
+3. Matplotlib
+
+Used for creating graphs and visualizations.
+
+Example:
+
+Line charts
+Bar charts
+Histograms
+4. Seaborn
+
+Used for advanced statistical data visualization.
+
+Example:
+
+Heatmaps
+Distribution plots
+4. What is Jupyter Notebook? Explain its key features.
+
+Definition:
+Jupyter Notebook is an interactive web-based environment used for writing and running Python code, especially for data analysis and visualization.
+
+Key Features:
+
+Interactive coding
+Users can write and run code in small blocks called cells.
+Visualization support
+Graphs and charts can be displayed directly.
+Markdown support
+Allows writing explanations using formatted text.
+Step-by-step execution
+Code can be executed one cell at a time.
+Supports multiple languages
+Mainly used for Python but supports others too.
+5. Explain the steps to create and run a program in Jupyter Notebook.
+
+Steps:
+
+Install Jupyter using pip
+pip install notebook
+Open terminal and start Jupyter
+jupyter notebook
+Open browser and click New → Python Notebook
+Write Python code inside a cell
+
+Example:
+
+print("Hello Data Science")
+Run the cell using Shift + Enter
+Output will appear below the cell.
+6. Explain different file formats used in data loading.
+1. CSV (Comma Separated Values)
+Most common data format
+Data separated by commas
+Easy to read and process
+
+Example:
+
+Name,Age,City
+John,25,London
+2. Excel (.xlsx)
+Spreadsheet format
+Can contain multiple sheets
+Often used in business data
+3. JSON (JavaScript Object Notation)
+Data stored in key-value format
+Often used in web APIs
+
+Example:
+
+{
+ "name": "John",
+ "age": 25
+}
+7. Explain the use of head(), info(), and describe() functions.
+
+These functions are used for data inspection in Pandas.
+
+head()
+
+Shows the first few rows of the dataset.
+
+Example:
+
+df.head()
+
+Useful for quickly viewing data.
+
+info()
+
+Displays dataset structure.
+
+Shows:
+
+Column names
+Data types
+Missing values
+
+Example:
+
+df.info()
+describe()
+
+Provides statistical summary of numerical columns.
+
+Shows:
+
+Mean
+Median
+Standard deviation
+Minimum and maximum values
+
+Example:
+
+df.describe()
+8. What are missing values? Explain different methods to handle them.
+
+Missing values occur when some data entries are empty or unavailable.
+
+Example:
+
+Name   Age
+John   25
+Sara   NaN
+
+Methods to handle missing values:
+
+1. Remove rows with missing values
+df.dropna()
+2. Replace with mean
+df.fillna(df.mean())
+3. Replace with median
+
+Useful when data contains outliers.
+
+4. Replace with constant value
+df.fillna(0)
+10-Marks Questions (Long Answers)
+1. Introduction to Data Science
+Definition
+
+Data Science is the process of collecting, analyzing, and interpreting data to extract meaningful insights.
+
+Data Science Lifecycle
+Data Collection
+Gather data from databases, websites, sensors, etc.
+Data Cleaning
+Remove errors and missing values.
+Data Exploration
+Understand patterns using statistics and graphs.
+Model Building
+Apply machine learning algorithms.
+Evaluation
+Test the model's performance.
+Deployment
+Use the model in real applications.
+Applications
+Healthcare disease prediction
+Financial fraud detection
+E-commerce recommendation systems
+Weather forecasting
+Role of Python
+
+Python helps in:
+
+Data analysis (Pandas)
+Numerical computation (NumPy)
+Visualization (Matplotlib)
+Machine learning (Scikit-learn)
+
+Example:
+Predicting house prices using machine learning models.
+
+2. Python Ecosystem for Data Science (NumPy and Pandas)
+Python Ecosystem
+
+The Python ecosystem includes tools, libraries, and frameworks used for data analysis and machine learning.
+
+NumPy
+
+NumPy stands for Numerical Python.
+
+Uses:
+
+Working with arrays
+Mathematical calculations
+Linear algebra operations
+
+Example:
+
+import numpy as np
+arr = np.array([1,2,3])
+
+Advantages:
+
+Faster computation
+Memory efficient
+Supports large datasets
+Pandas
+
+Pandas is used for data manipulation and analysis.
+
+Main structures:
+
+Series
+One dimensional data
+DataFrame
+Two dimensional table
+
+Example:
+
+import pandas as pd
+df = pd.read_csv("data.csv")
+
+Uses:
+
+Data cleaning
+Filtering
+Data transformation
+3. Jupyter Notebook Environment
+Installation Process
+Install Python
+Install Jupyter using pip
+pip install notebook
+Start Jupyter
+jupyter notebook
+Interface Components
+Cells
+Blocks where code or text is written.
+Toolbar
+Contains buttons for running cells and saving work.
+Menu Bar
+Provides options like file, edit, run, etc.
+Output Area
+Displays program results.
+Advantages
+Easy to learn
+Interactive coding
+Supports visualizations
+Good for data analysis and experiments
+4. Data Loading and Inspection
+Reading Datasets
+
+Pandas provides functions to load data.
+
+Example:
+
+CSV file
+
+df = pd.read_csv("data.csv")
+
+Excel file
+
+df = pd.read_excel("data.xlsx")
+
+JSON file
+
+df = pd.read_json("data.json")
+Exploring Data Structure
+
+Useful functions:
+
+df.head()
+df.tail()
+df.info()
+df.describe()
+Checking Data Types
+df.dtypes
+
+This helps identify whether columns contain numbers, strings, or dates.
+
+5. Data Cleaning Basics
+
+Data cleaning improves data quality and accuracy.
+
+Handling Missing Values
+df.fillna(df.mean())
+
+or
+
+df.dropna()
+Removing Duplicates
+df.drop_duplicates()
+Correcting Inconsistent Data
+
+Example:
+
+If "Male", "male", and "M" appear in a column, they should be standardized.
+
+df['gender'].replace({'M':'Male'})
+6. Complete Workflow of Data Preprocessing
+Step 1: Load Data
+df = pd.read_csv("data.csv")
+Step 2: Inspect Data
+
+Use functions:
+
+df.head()
+df.info()
+df.describe()
+
+This helps understand structure and detect problems.
+
+Step 3: Check Data Quality
+
+Identify:
+
+Missing values
+Duplicates
+Incorrect formats
+Step 4: Data Cleaning
+
+Apply techniques:
+
+Fill missing values
+Remove duplicates
+Correct inconsistent entries
+
+Example:
+
+df.drop_duplicates()
+df.fillna(0)
+Step 5: Prepare Data for Analysis
+
+Convert data types, normalize values, and organize data.
+
+After preprocessing, the dataset becomes clean and ready for analysis or machine learning.
+
+If you want, I can also help you:
+
+Convert this into perfect assignment format (teacher-impressing format).
+Shorten answers so they fit exactly in exam writing style.
+Tell you which lines teachers expect for full marks.

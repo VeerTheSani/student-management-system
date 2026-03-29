@@ -1,0 +1,39 @@
+GANDHINAGAR UNIVERSITY - ACADEMIC CALENDAR 2024-25
+
+SEMESTER 4 KEY DATES:
+
+January 2025:
+- January 6  : Semester 4 begins
+- January 14 : Uttarayan Holiday
+- January 26 : Republic Day Holiday
+
+February 2025:
+- February 3  : Last date to submit assignments (Java OOP, Python)
+- February 10 : Guest Lecture - AI & Machine Learning (Seminar Hall, 11 AM)
+- February 26 : Mahashivratri Holiday
+
+March 2025:
+- March 10 : Unit Test 1 begins
+- March 17 : Holi Holiday
+- March 24 : Unit Test 2 begins
+- March 31 : Last date for fee payment (late fine applicable after this)
+
+April 2025:
+- April 3-4  : Craftathon Hackathon (Lab 2 & Lab 3)
+- April 5-8  : Practical Examinations
+- April 10   : Last working day of semester
+- April 15   : End Semester Exams begin
+- April 23   : Last End Semester Exam
+
+May 2025:
+- May 15 : Expected result declaration
+- May 19 : Semester 5 registration begins
+
+HOLIDAYS LIST 2024-25:
+Diwali        - November 1-3
+Christmas     - December 25
+New Year      - January 1
+Uttarayan     - January 14
+Republic Day  - January 26
+Holi          - March 17
+Ram Navami    - April 6
