@@ -536,11 +536,13 @@ exports.tchatt = async (req, res) => {
 
         const response = await axios.post('http://127.0.0.1:8000/tchatt', {
             message: req.body.message,
-            teacher_id: teacher._id.toString()
+            teacher_id: teacher._id.toString(),
+            mode: req.body.mode || "chat"  
         })
 
         res.json({ reply: response.data.reply })
     } catch (error) {
+        console.error("FastAPI response:", error.response?.data);
         console.error("Error in tchatt:", error);
         res.status(500).json({ error: "Backend connection failed. Check Node console" });
     }

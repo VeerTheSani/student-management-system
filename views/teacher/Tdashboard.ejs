@@ -144,127 +144,308 @@
         });
     </script>
 
-<div id="chat-widget" style="position:fixed; bottom:24px; right:24px; z-index:1000; font-family:inherit;">
+<div id="acad-chat" style="position:fixed;bottom:28px;right:28px;z-index:9999;font-family:'DM Sans',system-ui,sans-serif;">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+#acad-chat * { box-sizing: border-box; margin: 0; padding: 0; }
+#acad-chat .cb { display:none;width:380px;background:#0d1117;border-radius:20px;overflow:hidden;position:absolute;bottom:72px;right:0;border:1px solid #1e2d22; }
+#acad-chat .cb.open { display:flex;flex-direction:column; }
+#acad-chat .hdr { background:#0d1117;padding:14px 18px;border-bottom:1px solid #1a2b1e;display:flex;align-items:center;justify-content:space-between;flex-shrink:0; }
+#acad-chat .hdr-left { display:flex;align-items:center;gap:10px; }
+#acad-chat .av { width:34px;height:34px;background:#0f3d1f;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px; }
+#acad-chat .htitle { color:#e2fce8;font-size:13px;font-weight:600;letter-spacing:0.01em; }
+#acad-chat .hsub { color:#3d7a4f;font-size:10px;font-family:'DM Mono',monospace;margin-top:1px; }
+#acad-chat .close-btn { background:none;border:none;cursor:pointer;color:#3d7a4f;font-size:16px;line-height:1;padding:4px;border-radius:6px;transition:color 0.15s; }
+#acad-chat .close-btn:hover { color:#6bda8e; }
+#acad-chat .msgs { height:300px;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;background:#0d1117;scrollbar-width:thin;scrollbar-color:#1e2d22 transparent; }
+#acad-chat .msgs::-webkit-scrollbar { width:4px; }
+#acad-chat .msgs::-webkit-scrollbar-track { background:transparent; }
+#acad-chat .msgs::-webkit-scrollbar-thumb { background:#1e2d22;border-radius:4px; }
+#acad-chat .msg-ai { background:#101c12;border:1px solid #1a2b1e;border-radius:14px 14px 14px 4px;padding:10px 13px;font-size:12.5px;color:#c8e6cc;line-height:1.6;max-width:92%;animation:slideIn 0.2s ease; }
+#acad-chat .msg-user { background:#0f3d1f;border:1px solid #1a3620;border-radius:14px 14px 4px 14px;padding:10px 13px;font-size:12.5px;color:#e2fce8;line-height:1.6;max-width:85%;align-self:flex-end;animation:slideIn 0.2s ease; }
+#acad-chat .msg-ai p { margin-bottom:6px; }
+#acad-chat .msg-ai p:last-child { margin-bottom:0; }
+#acad-chat .msg-ai strong { color:#6bda8e;font-weight:500; }
+#acad-chat .msg-ai ul { padding-left:16px; }
+#acad-chat .msg-ai li { margin-bottom:3px; }
+#acad-chat .typing-wrap { background:#101c12;border:1px solid #1a2b1e;border-radius:14px 14px 14px 4px;padding:12px 14px;max-width:92%;animation:slideIn 0.2s ease; }
+#acad-chat .typing-label { font-family:'DM Mono',monospace;font-size:10px;color:#3d7a4f;margin-bottom:8px;display:flex;align-items:center;gap:6px; }
+#acad-chat .typing-dot { width:5px;height:5px;border-radius:50%;background:#1b6b2f;animation:pulse 1.2s ease-in-out infinite; }
+#acad-chat .typing-dot:nth-child(2) { animation-delay:0.2s; }
+#acad-chat .typing-dot:nth-child(3) { animation-delay:0.4s; }
+#acad-chat .steps { display:flex;flex-direction:column;gap:5px; }
+#acad-chat .step { display:flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:10px;color:#2a5c35;transition:color 0.3s; }
+#acad-chat .step.active { color:#6bda8e; }
+#acad-chat .step.done { color:#3d7a4f; }
+#acad-chat .step-icon { width:14px;height:14px;border-radius:50%;border:1.5px solid #1a3620;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:8px;transition:all 0.3s; }
+#acad-chat .step.active .step-icon { border-color:#6bda8e;background:#0f3d1f;animation:spin 1s linear infinite; }
+#acad-chat .step.done .step-icon { border-color:#3d7a4f;background:#0f2e18; }
+#acad-chat .tool-card { margin-top:8px;background:#071a0d;border:1px solid #1a3620;border-radius:10px;padding:10px 12px;font-family:'DM Mono',monospace;font-size:10px;color:#6bda8e; }
+#acad-chat .tool-card .tc-label { color:#3d7a4f;font-size:9px;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.08em; }
+#acad-chat .tool-row { display:flex;align-items:center;gap:6px;margin-bottom:3px;color:#4e9c66; }
+#acad-chat .tool-row:last-child { margin-bottom:0; }
+#acad-chat .chips { padding:10px 14px;background:#0a160c;border-top:1px solid #111f13;display:flex;flex-wrap:wrap;gap:5px;flex-shrink:0; }
+#acad-chat .chip { background:transparent;border:1px solid #1a2b1e;color:#3d7a4f;border-radius:20px;padding:4px 9px;font-size:10.5px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.15s;white-space:nowrap; }
+#acad-chat .chip:hover { border-color:#6bda8e;color:#6bda8e;background:#071a0d; }
+#acad-chat .sched-chip { border-color:#1a3a2a;color:#2d7a52; }
+#acad-chat .sched-chip.active { border-color:#6bda8e;color:#6bda8e;background:#071a0d; }
+#acad-chat .footer { padding:10px 14px;background:#0d1117;border-top:1px solid #111f13;display:flex;gap:8px;align-items:center;flex-shrink:0; }
+#acad-chat .inp { flex:1;background:#101c12;border:1px solid #1a2b1e;border-radius:10px;padding:8px 12px;font-size:12.5px;color:#e2fce8;outline:none;font-family:'DM Sans',sans-serif;transition:border-color 0.15s; }
+#acad-chat .inp::placeholder { color:#2a4030; }
+#acad-chat .inp:focus { border-color:#2a5c35; }
+#acad-chat .send-btn { background:#0f3d1f;border:1px solid #1a3620;color:#6bda8e;border-radius:10px;padding:8px 14px;cursor:pointer;font-size:12px;font-weight:500;font-family:'DM Sans',sans-serif;transition:all 0.15s;white-space:nowrap; }
+#acad-chat .send-btn:hover { background:#1b6b2f;border-color:#6bda8e; }
+#acad-chat .send-btn:disabled { opacity:0.4;cursor:not-allowed; }
+#acad-chat .fab { width:52px;height:52px;border-radius:16px;background:#0f3d1f;border:1px solid #1a3620;color:#6bda8e;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;transition:all 0.2s;box-shadow:0 4px 24px rgba(15,61,31,0.5);margin-left:auto; }
+#acad-chat .fab:hover { background:#1b6b2f;transform:scale(1.05); }
+#acad-chat .sched-bar { display:none;background:#071a0d;border-top:1px solid #111f13;padding:8px 14px;flex-shrink:0;font-family:'DM Mono',monospace;font-size:10px;color:#6bda8e;align-items:center;gap:8px; }
+#acad-chat .sched-bar.on { display:flex; }
+#acad-chat .sched-dot { width:6px;height:6px;border-radius:50%;background:#6bda8e;animation:pulse 1s ease-in-out infinite; }
+@keyframes slideIn { from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)} }
+@keyframes pulse { 0%,100%{opacity:0.4}50%{opacity:1} }
+@keyframes spin { from{border-top-color:#6bda8e;border-right-color:transparent}to{transform:rotate(360deg)} }
+</style>
 
-  
-    <button onclick="toggleChat()" id="chat-toggle"
-        style="width:56px; height:56px; border-radius:50%; background:#059669; color:white; border:none; cursor:pointer; box-shadow:0 4px 20px rgba(5,150,105,0.4); font-size:22px; display:flex; align-items:center; justify-content:center; margin-left:auto; transition:transform 0.2s;"
-        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-        🧑‍🏫
-    </button>
+<!-- FAB button -->
+<button class="fab" onclick="acadToggle()">
+  <svg width="24" height="24" viewBox="0 0 44 44" fill="none">
+    <circle cx="22" cy="22" r="20" stroke="#1a3620" stroke-width="1"/>
+    <circle cx="22" cy="22" r="14" stroke="#2a5c35" stroke-width="1"/>
+    <circle cx="22" cy="22" r="4" fill="#6bda8e"/>
+    <line x1="22" y1="2" x2="22" y2="8" stroke="#6bda8e" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="22" y1="36" x2="22" y2="42" stroke="#6bda8e" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="2" y1="22" x2="8" y2="22" stroke="#6bda8e" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="36" y1="22" x2="42" y2="22" stroke="#6bda8e" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>
+</button>
 
-   
-    <div id="chat-box"
-        style="display:none; width:360px; background:white; border-radius:16px; box-shadow:0 8px 40px rgba(0,0,0,0.15); overflow:hidden; margin-bottom:12px; position:absolute; bottom:68px; right:0;">
+<!-- header av div
+<div class="av">
+  <svg width="20" height="20" viewBox="0 0 44 44" fill="none">
+    <circle cx="22" cy="22" r="20" stroke="#2a5c35" stroke-width="1"/>
+    <circle cx="22" cy="22" r="4" fill="#6bda8e"/>
+    <line x1="22" y1="2" x2="22" y2="8" stroke="#6bda8e" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="22" y1="36" x2="22" y2="42" stroke="#6bda8e" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="2" y1="22" x2="8" y2="22" stroke="#6bda8e" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="36" y1="22" x2="42" y2="22" stroke="#6bda8e" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>
+</div> -->
 
-        <div style="background:#059669; padding:16px 20px; display:flex; align-items:center; justify-content:space-between;">
-            <div style="display:flex; align-items:center; gap:10px;">
-                <div style="width:36px; height:36px; background:rgba(255,255,255,0.2); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:18px;">📊</div>
-                <div>
-                    <div style="color:white; font-weight:600; font-size:14px;">Class AI Assistant</div>
-                    <div style="color:rgba(255,255,255,0.7); font-size:11px;">Analyze your students</div>
-                </div>
-            </div>
-            <button onclick="toggleChat()" style="background:none; border:none; color:white; cursor:pointer; font-size:18px; opacity:0.7;">✕</button>
-        </div>
-
-
-        <div id="chat-messages"
-            style="height:280px; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:10px; background:#f9fafb;">
-            <div style="background:white; border-radius:12px; padding:10px 14px; font-size:13px; color:#374151; box-shadow:0 1px 4px rgba(0,0,0,0.06); max-width:90%;">
-                👋 Hi! Ask me anything about your class performance.
-            </div>
-        </div>
-
-        <!-- s------ef-----afea -----Suggestions --------------->
-        <div style="padding:10px 16px; background:#f0fdf4; border-top:1px solid #d1fae5; display:flex; flex-wrap:wrap; gap:6px;">
-            <button onclick="quickAsk('Who are the weakest students?')"
-                style="background:white; border:1px solid #059669; color:#059669; border-radius:20px; padding:5px 10px; font-size:11px; cursor:pointer;">
-                😟 Weakest students
-            </button>
-            <button onclick="quickAsk('Who has the highest CGPA?')"
-                style="background:white; border:1px solid #059669; color:#059669; border-radius:20px; padding:5px 10px; font-size:11px; cursor:pointer;">
-                🏆 Top student
-            </button>
-            <button onclick="quickAsk('How many students failed?')"
-                style="background:white; border:1px solid #059669; color:#059669; border-radius:20px; padding:5px 10px; font-size:11px; cursor:pointer;">
-                ❌ Failed students
-            </button>
-            <button onclick="quickAsk('Which subject has lowest average marks?')"
-                style="background:white; border:1px solid #059669; color:#059669; border-radius:20px; padding:5px 10px; font-size:11px; cursor:pointer;">
-                📉 Weakest subject
-            </button>
-            <button onclick="quickAsk('Give me a full class performance summary')"
-                style="background:white; border:1px solid #059669; color:#059669; border-radius:20px; padding:5px 10px; font-size:11px; cursor:pointer;">
-                📋 Class summary
-            </button>
-        </div>
-
-        <!-- Input -->
-        <div style="padding:12px 16px; background:white; border-top:1px solid #e5e7eb; display:flex; gap:8px;">
-            <input id="chat-input" type="text" placeholder="Ask about your class..."
-                style="flex:1; border:1px solid #e5e7eb; border-radius:10px; padding:8px 12px; font-size:13px; outline:none; color:#374151;"
-                onfocus="this.style.borderColor='#059669'" onblur="this.style.borderColor='#e5e7eb'" />
-            <button onclick="sendMessage()"
-                style="background:#059669; color:white; border:none; border-radius:10px; padding:8px 14px; cursor:pointer; font-size:13px; font-weight:600;"
-                onmouseover="this.style.background='#047857'" onmouseout="this.style.background='#059669'">
-                Send
-            </button>
-        </div>
+<div class="cb" id="acad-cb">
+  <div class="hdr">
+    <div class="hdr-left">
+      <div class="av">📊</div>
+      <div>
+        <div class="htitle">Class AI Assistant</div>
+        <div class="hsub">● CONNECTED · student_mgm2</div>
+      </div>
     </div>
+    <button class="close-btn" onclick="acadToggle()">✕</button>
+  </div>
+
+  <div class="msgs" id="acad-msgs">
+    <div class="msg-ai">👋 Hi! Ask me anything about your class performance, or enable <strong>Schedule Mode</strong> to arrange a meeting.</div>
+  </div>
+
+  <div class="sched-bar" id="sched-bar">
+    <div class="sched-dot"></div>
+    <span>Schedule mode active — describe the meeting you want to arrange</span>
+  </div>
+
+  <div class="chips">
+    <button class="chip" onclick="quickAsk('Who are the weakest students?')">😟 Weakest</button>
+    <button class="chip" onclick="quickAsk('Who has the highest CGPA?')">🏆 Top student</button>
+    <button class="chip" onclick="quickAsk('How many students failed?')">❌ Failed</button>
+    <button class="chip" onclick="quickAsk('Which subject has the lowest average marks?')">📉 Weak subject</button>
+    <button class="chip" onclick="quickAsk('Give me a full class performance summary')">📋 Summary</button>
+    <button class="chip sched-chip" id="sched-toggle" onclick="toggleSchedMode()">📅 Schedule meeting</button>
+  </div>
+
+  <div class="footer">
+    <input class="inp" id="acad-inp" type="text" placeholder="Ask about your class..." />
+    <button class="send-btn" id="acad-send" onclick="acadSend()">Send ↑</button>
+  </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
 <script>
-    function toggleChat() {
-        const box = document.getElementById('chat-box')
-        box.style.display = box.style.display === 'none' ? 'block' : 'none'
+var _schedMode = false;
+var _busy = false;
+
+function acadToggle() {
+  var cb = document.getElementById('acad-cb');
+  cb.classList.toggle('open');
+}
+
+function toggleSchedMode() {
+  _schedMode = !_schedMode;
+  var btn = document.getElementById('sched-toggle');
+  var bar = document.getElementById('sched-bar');
+  var inp = document.getElementById('acad-inp');
+  if (_schedMode) {
+    btn.classList.add('active');
+    bar.classList.add('on');
+    inp.placeholder = 'e.g. Schedule a parent meeting for Monday at 10am...';
+  } else {
+    btn.classList.remove('active');
+    bar.classList.remove('on');
+    inp.placeholder = 'Ask about your class...';
+  }
+}
+
+function quickAsk(q) {
+  document.getElementById('acad-inp').value = q;
+  acadSend();
+}
+
+var _CHAT_STEPS = [
+  'Connecting to database...',
+  'Fetching student records...',
+  'Scanning academic data...',
+  'Running analysis...',
+  'Generating response...'
+];
+
+var _SCHED_STEPS = [
+  'Parsing meeting details...',
+  'Preparing notification...',
+  'Calling arrange_meeting()...',
+  'Sending to Activepieces...',
+  'Notifying students...'
+];
+
+function buildTypingNode(isSchedule) {
+  var steps = isSchedule ? _SCHED_STEPS : _CHAT_STEPS;
+  var wrap = document.createElement('div');
+  wrap.className = 'typing-wrap';
+  wrap.id = 'acad-typing';
+
+  var lbl = document.createElement('div');
+  lbl.className = 'typing-label';
+  lbl.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div><span>' + (isSchedule ? 'Scheduling meeting' : 'Analyzing') + '</span>';
+  wrap.appendChild(lbl);
+
+  var stepsDiv = document.createElement('div');
+  stepsDiv.className = 'steps';
+
+  steps.forEach(function(s, i) {
+    var stepEl = document.createElement('div');
+    stepEl.className = 'step';
+    stepEl.id = 'step-' + i;
+    stepEl.innerHTML = '<div class="step-icon"></div><span>' + s + '</span>';
+    stepsDiv.appendChild(stepEl);
+  });
+
+  if (isSchedule) {
+    var tc = document.createElement('div');
+    tc.className = 'tool-card';
+    tc.id = 'tool-preview';
+    tc.style.display = 'none';
+    tc.innerHTML = '<div class="tc-label">tool call · arrange_meeting</div><div class="tool-row">📅 <span id="tc-date">--</span></div><div class="tool-row">⏰ <span id="tc-time">--</span></div><div class="tool-row">📝 <span id="tc-topic">--</span></div>';
+    stepsDiv.appendChild(tc);
+  }
+
+  wrap.appendChild(stepsDiv);
+  return wrap;
+}
+
+function animateSteps(total, delay, cb) {
+  var i = 0;
+  function next() {
+    if (i > 0) {
+      var prev = document.getElementById('step-' + (i-1));
+      if (prev) { prev.classList.remove('active'); prev.classList.add('done'); prev.querySelector('.step-icon').innerHTML = '✓'; }
     }
-
-    function quickAsk(question) {
-        document.getElementById('chat-input').value = question
-        sendMessage()
+    if (i < total) {
+      var cur = document.getElementById('step-' + i);
+      if (cur) cur.classList.add('active');
+      i++;
+      setTimeout(next, delay);
+    } else {
+      if (cb) cb();
     }
+  }
+  next();
+}
 
-    async function sendMessage() {
-        const input = document.getElementById('chat-input')
-        const messages = document.getElementById('chat-messages')
-        const message = input.value.trim()
-        if (!message) return
+async function acadSend() {
+  if (_busy) return;
+  var inp = document.getElementById('acad-inp');
+  var msgs = document.getElementById('acad-msgs');
+  var sendBtn = document.getElementById('acad-send');
+  var msg = inp.value.trim();
+  if (!msg) return;
 
-        messages.innerHTML += `
-            <div style="display:flex; justify-content:flex-end;">
-                <div style="background:#059669; color:white; border-radius:12px; padding:10px 14px; font-size:13px; max-width:85%;">${message}</div>
-            </div>`
-            
-        input.value = ''
-        messages.scrollTop = messages.scrollHeight
+  _busy = true;
+  sendBtn.disabled = true;
 
-        messages.innerHTML += `<div id="typing" style="background:white; border-radius:12px; padding:10px 14px; font-size:13px; color:#9ca3af; box-shadow:0 1px 4px rgba(0,0,0,0.06); max-width:85%;">Analyzing class data...</div>`
-        messages.scrollTop = messages.scrollHeight
+  var userEl = document.createElement('div');
+  userEl.className = 'msg-user';
+  userEl.textContent = msg;
+  msgs.appendChild(userEl);
+  inp.value = '';
+  msgs.scrollTop = msgs.scrollHeight;
 
-        try {
-            const res = await fetch('/tchatt', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message })
-            })
-            const data = await res.json()
+  var isSchedule = _schedMode;
+  var typingNode = buildTypingNode(isSchedule);
+  msgs.appendChild(typingNode);
+  msgs.scrollTop = msgs.scrollHeight;
 
-            document.getElementById('typing').remove()
+  var stepDelay = isSchedule ? 500 : 350;
+  var stepCount = isSchedule ? _SCHED_STEPS.length : _CHAT_STEPS.length;
 
-            messages.innerHTML += `
-                    <div style="background:white; border-radius:12px; padding:10px 14px; font-size:13px; color:#374151; box-shadow:0 1px 4px rgba(0,0,0,0.06); max-width:90%;">${marked.parse(data.reply)}</div>`
-        } catch (err) {
-            document.getElementById('typing').remove()
-            messages.innerHTML += `<div style="background:white; border-radius:12px; padding:10px 14px; font-size:13px; color:#ef4444; max-width:85%;">Something went wrong. Try again.</div>`
-        }
+  var fetchDone = false;
+  var animDone = false;
+  var replyData = null;
 
-        messages.scrollTop = messages.scrollHeight
-    }
+  animateSteps(stepCount, stepDelay, function() {
+    animDone = true;
+    if (fetchDone) showReply(replyData, isSchedule, msgs, sendBtn);
+  });
 
-    document.getElementById('chat-input').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') sendMessage()
-    })
+  try {
+    var res = await fetch('/tchatt', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: msg, mode: isSchedule ? 'schedule' : 'chat' })
+    });
+    var data = await res.json();
+    fetchDone = true;
+    replyData = data;
+    if (animDone) showReply(data, isSchedule, msgs, sendBtn);
+  } catch(e) {
+    fetchDone = true;
+    replyData = { reply: 'Connection failed. Check the server.' };
+    if (animDone) showReply(replyData, isSchedule, msgs, sendBtn);
+  }
+}
+
+function showReply(data, isSchedule, msgs, sendBtn) {
+  var typing = document.getElementById('acad-typing');
+  if (typing) typing.remove();
+
+  var reply = (data && data.reply) ? data.reply : 'Something went wrong.';
+
+  var el = document.createElement('div');
+  el.className = 'msg-ai';
+
+  if (isSchedule && reply.startsWith('✅')) {
+    el.innerHTML = '<div style="font-family:\'DM Mono\',monospace;font-size:11px;color:#6bda8e;line-height:1.7;">' + reply.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>') + '</div>';
+  } else {
+    el.innerHTML = marked.parse(reply);
+  }
+
+  msgs.appendChild(el);
+  msgs.scrollTop = msgs.scrollHeight;
+  _busy = false;
+  sendBtn.disabled = false;
+}
+
+document.getElementById('acad-inp').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') acadSend();
+});
 </script>
+</div>
+
 
     <%- include('../include/_Sfoot') %>
