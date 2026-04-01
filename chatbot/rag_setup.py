@@ -20,11 +20,12 @@ def load_all_docs(folder="./docs"):
 
 
         chunks = []
+        overlaping = 100
         i = 0
         while i < len(text):
-            chunk = text[i : i+400]
+            chunk = text[i : i+600]
             chunks.append(chunk)
-            i += 400
+            i += 600 - overlaping
         embeddings = model.encode(chunks).tolist()
         collection.add(
             documents=chunks,
